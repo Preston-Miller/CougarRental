@@ -55,6 +55,11 @@ app.get('/api/debug/config', (req, res) => {
   });
 });
 
+// Health check (no secrets exposed)
+app.get('/api/health', (req, res) => {
+  res.json({ ok: true, timestamp: new Date().toISOString() });
+});
+
 // API: list cougars
 app.get('/api/cougars', (req, res) => {
   res.json(cougars);

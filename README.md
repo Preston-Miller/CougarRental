@@ -23,3 +23,7 @@ Open http://localhost:3000
   - `dotenv@8.2.0` — outdated
 
 Your scanner should flag hardcoded secrets, committed `.env`, and these dependency CVEs.
+
+## Changelog
+
+- **1.0.1** — Added `/api/health` endpoint for monitoring; no secrets exposed.

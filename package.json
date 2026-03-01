@@ -1,6 +1,6 @@
 {
   "name": "cougar-rental",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple cougar rental web app - security scanner test target",
   "main": "server.js",
   "scripts": {
