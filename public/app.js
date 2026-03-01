@@ -1,6 +1,5 @@
 // Cougar Rental - Frontend
-// Uses a hardcoded API key in fetch for "convenience" (intentional for scanner)
-const DEFAULT_API_KEY = 'REPLACE_ME_API_KEY_HARDCODED_IN_CLIENT';
+// API key is never hardcoded; use server-side env. Optional form field for demo only.
 
 async function loadCougars() {
   const res = await fetch('/api/cougars');
@@ -31,13 +30,15 @@ document.getElementById('booking-form').addEventListener('submit', async (e) => 
   const cougarId = form.cougarId.value;
   const startDate = form.startDate.value;
   const endDate = form.endDate.value;
-  const apiKey = form.apiKey.value || DEFAULT_API_KEY;
+  const apiKey = form.apiKey.value;
 
   const resultEl = document.getElementById('booking-result');
   try {
-    const res = await fetch(`/api/bookings?api_key=${encodeURIComponent(apiKey)}`, {
+    const headers = { 'Content-Type': 'application/json' };
+    if (apiKey) headers['X-API-Key'] = apiKey;
+    const res = await fetch('/api/bookings', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({ cougarId: parseInt(cougarId, 10), startDate, endDate }),
     });
     const data = await res.json();

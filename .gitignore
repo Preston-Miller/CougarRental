@@ -1,4 +1,4 @@
 node_modules/
 *.log
 .DS_Store
-# Intentionally NOT ignoring .env so it can be committed for scanner testing
+.env
