@@ -1,0 +1,17 @@
+{
+  "name": "cougar-rental",
+  "version": "1.0.0",
+  "description": "Simple cougar rental web app - security scanner test target",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "4.16.4",
+    "lodash": "4.17.15",
+    "jsonpath-plus": "5.0.0",
+    "minimist": "1.2.0",
+    "dotenv": "8.2.0"
+  }
+}

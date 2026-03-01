@@ -1,0 +1,132 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #1a1a2e;
+  color: #eee;
+  min-height: 100vh;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #333;
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 0;
+  color: #e94560;
+}
+
+.tagline {
+  color: #888;
+  margin: 0.5rem 0 0;
+}
+
+h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: #ccc;
+}
+
+#cougar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.cougar-card {
+  background: #16213e;
+  border-radius: 8px;
+  padding: 1.25rem;
+  border: 1px solid #333;
+}
+
+.cougar-card h3 {
+  margin: 0 0 0.5rem;
+  color: #e94560;
+}
+
+.cougar-card .meta {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.cougar-card .price {
+  margin-top: 0.75rem;
+  font-weight: 600;
+  color: #4ecca3;
+}
+
+.booking-form {
+  background: #16213e;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+}
+
+.booking-form label {
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.booking-form input,
+.booking-form select {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background: #1a1a2e;
+  color: #eee;
+}
+
+.booking-form button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background: #e94560;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.booking-form button:hover {
+  background: #c73e54;
+}
+
+#booking-result {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+#booking-result.success {
+  background: #0d3320;
+  color: #4ecca3;
+}
+
+#booking-result.error {
+  background: #331a1a;
+  color: #e94560;
+}
+
+footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #333;
+  text-align: center;
+  color: #666;
+  font-size: 0.85rem;
+}
