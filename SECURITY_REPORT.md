@@ -1,15 +1,15 @@
 # VibeSec Security Report
 Repo: Preston-Miller/CougarRental
-Scanned: 2026-03-01 01:26:27 UTC
-Issues Found: 4
+Scanned: 2026-03-01 01:28:38 UTC
+Issues Found: 5
 
 ## [SEV-001] CRITICAL -- Generic secret
 
-**File:** public/app.js
-**Type:** JavaScript
-**Line:** 3
-**Evidence:** `API_KEY = 'REPLACE_ME_API_KEY_HARDCODED_IN_CLIENT'`
-**Risk:** Sensitive information is hardcoded in the client-side JavaScript. An attacker can view the source code and extract secrets.
+**File:** .env.example
+**Type:** EXAMPLE
+**Line:** 9
+**Evidence:** `PASSWORD=REPLACE_ME_DB_PASSWORD`
+**Risk:** Placeholder for sensitive information in the example environment file. An attacker can guess or brute-force the actual database password.
 
 **OWASP Category:** Secrets Management
 **OWASP References:**
@@ -20,16 +20,16 @@ Issues Found: 4
 3. Add automated secret scanning in CI and block new leaked credentials.
 
 **Fix Steps:**
-1. Remove hardcoded secrets and use environment variables or secure storage.
-**Verify:** Review the client-side code to ensure no secrets are present.
+1. Replace placeholders with actual secure values or remove them entirely.
+**Verify:** Review the .env.example file to ensure no sensitive placeholders remain.
 
 ## [SEV-002] CRITICAL -- Generic secret
 
-**File:** public/app.js
-**Type:** JavaScript
-**Line:** 38
-**Evidence:** `api_key=${encodeURIComponent(apiKey)}`,`
-**Risk:** Sensitive information is hardcoded in the server-side JavaScript. An attacker with server access can read these secrets.
+**File:** .env.example
+**Type:** EXAMPLE
+**Line:** 12
+**Evidence:** `API_KEY=REPLACE_ME_API_KEY`
+**Risk:** Placeholder for sensitive API key in the example environment file. An attacker can infer the structure of real API keys.
 
 **OWASP Category:** Secrets Management
 **OWASP References:**
@@ -40,43 +40,64 @@ Issues Found: 4
 3. Add automated secret scanning in CI and block new leaked credentials.
 
 **Fix Steps:**
-1. Remove hardcoded secrets and use environment variables or secure storage.
-**Verify:** Review the server-side code to ensure no secrets are present.
+1. Replace placeholders with actual secure values or remove them entirely.
+**Verify:** Review the .env.example file to ensure no sensitive placeholders remain.
 
-## [SEV-003] CRITICAL -- .env: dotenv_not_gitignored
+## [SEV-003] CRITICAL -- Generic secret
 
-**File:** .env
-**Type:** Environment file
-**Detail:** .env is committed and not listed in .gitignore
-**Risk:** .env file is not listed in .gitignore. Anyone with repository access can view sensitive information.
+**File:** .env.example
+**Type:** EXAMPLE
+**Line:** 14
+**Evidence:** `API_KEY=REPLACE_ME_SENDGRID_KEY`
+**Risk:** Placeholder for sensitive SendGrid API key in the example environment file. An attacker can guess the actual SendGrid API key.
+
+**OWASP Category:** Secrets Management
+**OWASP References:**
+- https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+**Standard Fix Requirements (OWASP):**
+1. Remove hardcoded secrets from source control and rotate exposed credentials.
+2. Load secrets from a managed secret store or environment variables at runtime.
+3. Add automated secret scanning in CI and block new leaked credentials.
+
+**Fix Steps:**
+1. Replace placeholders with actual secure values or remove them entirely.
+**Verify:** Review the .env.example file to ensure no sensitive placeholders remain.
+
+## [SEV-004] CRITICAL -- Generic secret
+
+**File:** .env.example
+**Type:** EXAMPLE
+**Line:** 17
+**Evidence:** `SECRET=REPLACE_ME_JWT_SECRET`
+**Risk:** Placeholder for sensitive JWT secret in the example environment file. An attacker can guess the JWT secret to forge tokens.
+
+**OWASP Category:** Secrets Management
+**OWASP References:**
+- https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+**Standard Fix Requirements (OWASP):**
+1. Remove hardcoded secrets from source control and rotate exposed credentials.
+2. Load secrets from a managed secret store or environment variables at runtime.
+3. Add automated secret scanning in CI and block new leaked credentials.
+
+**Fix Steps:**
+1. Replace placeholders with actual secure values or remove them entirely.
+**Verify:** Review the .env.example file to ensure no sensitive placeholders remain.
+
+## [SEV-005] CRITICAL -- .env: dotenv_example_has_credentials
+
+**File:** .env.example
+**Type:** EXAMPLE
+**Detail:** .env.example contains real-looking value for NODE_ENV
+**Risk:** The .env.example file contains a value resembling a real environment variable. An attacker can use this information to understand the environment setup.
 
 **OWASP Category:** Secrets in Configuration
 **OWASP References:**
 - https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
 **Standard Fix Requirements (OWASP):**
-1. Add .env patterns to .gitignore and remove tracked sensitive files.
-2. Purge sensitive values from repository history if previously committed.
-3. Rotate credentials after cleanup.
+1. Replace real values in .env.example with non-sensitive placeholders.
+2. Document required keys without including credential material.
+3. Rotate any leaked credentials and validate they are no longer accepted.
 
 **Fix Steps:**
-1. Add .env to .gitignore and remove it from the repository.
-**Verify:** Check the repository to ensure .env is not committed.
-
-## [SEV-004] CRITICAL -- .env: dotenv_has_real_values
-
-**File:** .env
-**Type:** Environment file
-**Detail:** Key NODE_ENV has a non-placeholder value
-**Risk:** The .env file has actual configuration values. Exposed .env file allows attackers to use real values for unauthorized access.
-
-**OWASP Category:** Secrets in Configuration
-**OWASP References:**
-- https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
-**Standard Fix Requirements (OWASP):**
-1. Replace real .env credentials with runtime-injected secrets.
-2. Store secret material outside source control.
-3. Rotate exposed keys before redeploying.
-
-**Fix Steps:**
-1. Replace real values with placeholders and secure the file.
-**Verify:** Review the .env file to ensure it has no real values.
+1. Ensure that the .env.example file does not contain any real-looking values.
+**Verify:** Review the .env.example file to ensure no misleading values remain.
